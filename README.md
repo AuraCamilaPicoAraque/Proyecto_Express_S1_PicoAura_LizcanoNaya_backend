@@ -1,0 +1,3 @@
+# KarenFlix
+
+El objetivo de este proyecto es desarrollar una aplicación **full-stack** usando **Node.js + Express** para el backend y **HTML + CSS puro** para el frontend, que permita a los usuarios registrar, calificar y rankear películas, animes y series geek. Esta herramienta debe incluir funcionalidades para gestionar usuarios, reseñas, categorías y rankings, diferenciando permisos de usuario y administrador. Además, debe contar con autenticación segura, validaciones robustas y un frontend que consuma la API desarrollada.
