@@ -1,0 +1,28 @@
+{
+  "name": "proyecto_express_s1_picoaura_lizcanonaya_backend",
+  "version": "1.0.0",
+  "description": "El objetivo de este proyecto es desarrollar una aplicación **full-stack** usando **Node.js + Express** para el backend y **HTML + CSS puro** para el frontend, que permita a los usuarios registrar, calificar y rankear películas, animes y series geek. Esta herramienta debe incluir funcionalidades para gestionar usuarios, reseñas, categorías y rankings, diferenciando permisos de usuario y administrador. Además, debe contar con autenticación segura, validaciones robustas y un frontend que consuma la API desarrollada.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    ".": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "argon2": "^0.44.0",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.20.0",
+    "nodemon": "^3.1.10",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  }
+}
