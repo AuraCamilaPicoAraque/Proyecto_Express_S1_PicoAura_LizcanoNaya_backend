@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import passport from "passport";
+import { swaggerDocs } from "./swagger.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 
 import userRouter from "./routes/userRouter.js";
@@ -11,6 +12,9 @@ const app = express();
 
 
 app.use(express.json());
+
+// Documentación con Swagger
+swaggerDocs(app);
 
 
 // Configuración de CORS
