@@ -11,7 +11,7 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url: "http://localhost:3000/",
+      url: "http://localhost:5500/",
       description: "Servidor local",
     },
   ],
@@ -26,5 +26,5 @@ const swaggerSpec = swaggerJSDoc(options);
 
 export const swaggerDocs = (app) => {
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-  console.log("📑 Swagger corriendo en http://localhost:3000/api-docs");
+  console.log("📑 Swagger corriendo en http://localhost:5500/api-docs");
 };

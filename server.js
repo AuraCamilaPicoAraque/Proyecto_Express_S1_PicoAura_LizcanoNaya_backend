@@ -1,28 +1,27 @@
-import express from "express";
+// server.js
 import dotenv from "dotenv";
-import { connectDB } from "./config/db.js";
-import { swaggerDocs } from "./swagger.js";
-
-// Rutas
-import userRouter from "./routes/userRouter.js";
-import authRouter from "./routes/authRouter.js";
-
 dotenv.config();
-const app = express();
-app.use(express.json());
 
-// Conexión a Mongo
-connectDB();
+import app from "./app.js";
+import { connectDB } from "./config/db.js";
 
-// Rutas API
-app.use("/api/users", userRouter);
-app.use("/api/auth", authRouter);
+const PORT = process.env.PORT || 1100;
 
-// Swagger Docs
-swaggerDocs(app);
+async function start() {
+  try {
+    // Conexión a Mongo (si truena, verás el error)
+    await connectDB();
+  } catch (err) {
+    console.error("Error conectando a Mongo:", err?.message || err);
+    // Si prefieres abortar: process.exit(1);
+  }
 
-// Puerto dinámico (usa el del .env o el que le pase la plataforma)
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
-});
+  // Healthcheck útil para curl rápido
+  app.get("/health", (_req, res) => res.json({ ok: true }));
+
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT} exitosamente`);
+  });
+}
+
+start();

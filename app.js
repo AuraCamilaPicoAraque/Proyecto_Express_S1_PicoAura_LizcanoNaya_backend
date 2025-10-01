@@ -1,33 +1,42 @@
 import express from "express";
 import dotenv from "dotenv";
 import passport from "passport";
+import cors from "cors";
 import { swaggerDocs } from "./swagger.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 
 import userRouter from "./routes/userRouter.js";
 import authRoutes from "./routes/authRoutes.js";
+import movieRoutes from "./routes/movieRouter.js";
 
-dotenv.config();    
+dotenv.config();
+
 const app = express();
-
-
 app.use(express.json());
 
-// Documentación con Swagger
-swaggerDocs(app);
+app.set("json spaces", 2);
 
+// CORS: permite tu frontend (5500 por defecto)
+app.use(cors({
+    origin: process.env.CORS_ORIGIN || "http://127.0.0.1:5500",
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
-// Configuración de CORS
+// Passport
 import "./config/passport.js";
 app.use(passport.initialize());
 
-// Rutas
+// Docs
+swaggerDocs(app);
+
+// Rutas API
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRoutes);
+app.use("/api/movies", movieRoutes);
 
-
-// Middleware de manejo de errores
+// Manejo de errores 
 app.use(errorHandler);
-
 
 export default app;

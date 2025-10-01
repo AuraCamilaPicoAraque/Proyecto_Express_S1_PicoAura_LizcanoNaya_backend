@@ -6,7 +6,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    ".": "nodemon app.js"
+    ".": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -14,11 +14,13 @@
   "dependencies": {
     "argon2": "^0.44.0",
     "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "express-rate-limit": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.20.0",
+    "node-fetch": "^3.3.2",
     "nodemon": "^3.1.10",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
