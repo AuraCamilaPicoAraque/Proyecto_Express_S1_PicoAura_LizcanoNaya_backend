@@ -128,9 +128,7 @@ export const getByGenre = async (req, res, next) => {
     const db = getDB();
     const { genre } = req.params;
 
-    const results = await db.collection("inventario").find({
-      genres: genre
-    }).toArray();
+    const results = await db.collection("inventario").find({  genres: genre }).toArray();
 
     res.json(results);
   } catch (err) {

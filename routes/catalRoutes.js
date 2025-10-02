@@ -42,6 +42,13 @@ router.patch("/:id/like", requireAuth, async (req, res, next) => {
   }
 });
 
+
+// ================
+//  Nuevos endpoints para funcionalidades adicionales
+// ================
+
+
+// endpoint para obtener los ítems más populares (ejemplo simple basado en un campo "popularity")
 router.get("/popular", async (_req, res, next) => {
   try {
     const db = getDB();
@@ -51,6 +58,49 @@ router.get("/popular", async (_req, res, next) => {
     next(err);
   }
 });
+
+
+
+// enpoint para obtener solo las películas 
+
+router.get("/movies", async (req, res, next) => {
+  try {
+    const db = getDB();
+    const items = await db.collection("inventario").find({ categoria: "movie" }).toArray();
+    res.json(items);
+  } catch (err) {
+    next(err);
+  }
+});
+
+
+// endpoint para obtener solo las series
+
+router.get("/series", async (req, res, next)=> {
+  try{
+    const db = getDB();
+    const items = await db.collection("inventario").find({ categoria: "serie" }).toArray();
+    res.json(items);
+  } catch(err){
+    next(err);
+  }
+});
+
+
+// endpoint para obtener solo los animes
+
+router.get("/animes", async (req, res, next)=> {
+  try{
+    const db = getDB();
+    const items = await db.collection("inventario").find({ categoria: "anime" }).toArray();
+    res.json(items);
+  } catch(err){
+    next(err);
+  }
+});
+
+
+
 
 
 // Rutas donde estan los endpoints del catálogo de películas y series 
