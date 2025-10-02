@@ -31,10 +31,22 @@ router.patch("/:id/like", requireAuth, async (req, res, next) => {
       { returnDocument: "after" }
     );
 
+    
+
     res.json({
       likes: result.value.likes?.length || 0,
       dislikes: result.value.dislikes?.length || 0
     });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/popular", async (_req, res, next) => {
+  try {
+    const db = getDB();
+    const items = await db.collection("inventario").find().sort({ "popularity": -1 }).limit(20).toArray();
+    res.json(items);
   } catch (err) {
     next(err);
   }
