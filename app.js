@@ -18,7 +18,7 @@ app.set("json spaces", 2);
 
 // CORS: permite tu frontend (5500 por defecto)
 app.use(cors({
-    origin: process.env.CORS_ORIGIN || "http://127.0.0.1:5500",
+    origin: process.env.CORS_ORIGIN || "https://auracamilapicoaraque.github.io",
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
