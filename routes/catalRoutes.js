@@ -58,7 +58,7 @@ router.get("/", getinventario);                   // coge todo el catálogo
 router.get("/categoria/:categoria", getByCategoria); // filtro por categoría
 router.get("/search", searchByTitle);           // búsqueda por título 
 router.get("/genre/:genre", getByGenre);       // filtra por género
-router.get("/:id", getById);                    // coge un ítem por su ID
+router.get("/findmovie/:id", getById);                    // coge un ítem por su ID
 
 
 export default router;
