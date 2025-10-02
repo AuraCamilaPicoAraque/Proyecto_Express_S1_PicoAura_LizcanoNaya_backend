@@ -102,6 +102,30 @@ router.get("/animes", async (req, res, next)=> {
 
 
 
+// endpoint para obtener el ranking de ítems más populares, con filtros opcionales
+router.get("/ranking", async (req, res, next) => {
+  try {
+    const db = getDB();
+    const categoria = (req.query.categoria || "").toLowerCase().trim();
+    const limit = Math.min(parseInt(req.query.limit || "10", 10) || 10, 100);
+
+    const match = {};
+    if (categoria) match.categoria = categoria;
+
+    const items = await db.collection("inventario")
+      .find(match)
+      .sort({ vote_average: -1 }) // ordena por voto promedio descendente
+      .limit(limit)
+      .toArray();
+
+    res.json(items);
+  } catch (err) {
+    next(err);
+  }
+});
+
+
+
 
 // Rutas donde estan los endpoints del catálogo de películas y series 
 router.get("/", getinventario);                   // coge todo el catálogo
