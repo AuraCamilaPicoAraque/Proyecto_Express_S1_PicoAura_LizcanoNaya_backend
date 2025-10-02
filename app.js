@@ -8,7 +8,7 @@ import { errorHandler } from "./middlewares/errorHandler.js";
 import userRouter from "./routes/userRouter.js";
 import authRoutes from "./routes/authRoutes.js";
 import movieRoutes from "./routes/movieRouter.js";
-
+import catalogoRoutes from "./routes/catalRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -35,6 +35,7 @@ swaggerDocs(app);
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRoutes);
 app.use("/api/movies", movieRoutes);
+app.use("/api/catalogo", catalogoRoutes);
 
 // Manejo de errores 
 app.use(errorHandler);

@@ -8,6 +8,7 @@ export const getinventario = async (req, res, next) => {
   try {
     const db = getDB();
     const items = await db.collection("inventario").find().toArray();
+    console.log(items);
     res.json(items);
   } catch (err) {
     next(err);
@@ -20,7 +21,7 @@ export const getinventario = async (req, res, next) => {
 export const getByCategoria = async (req, res, next) => {
   try {
     const db = getDB();
-    const { inventario } = req.params;
+    const { categoria  } = req.params;
     const items = await db.collection("inventario").find({ categoria }).toArray();
     res.json(items);
   } catch (err) {
@@ -48,7 +49,7 @@ export const getById = async (req, res, next) => {
 
 // creamos un nuevo item en el inventario
 export const createItem = async (req, res, next) => {
-  try {
+  try { 
     const db = getDB();
     const newItem = { ...req.body, createdAt: new Date() };
     const result = await db.collection("inventario").insertOne(newItem);

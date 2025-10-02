@@ -1,8 +1,9 @@
 import { Router } from "express";
+import { getDB } from "../config/db.js"; // <– lo usamos en el patch pero no estaba importado
 
 // importamos la conexión a la base de datos y los controladores de catálogo
 import {
-  getCatalogo,
+  getinventario,
   getByCategoria,
   getById,
   searchByTitle,
@@ -20,7 +21,7 @@ router.patch("/:id/like", requireAuth, async (req, res, next) => {
     const { action } = req.body; // aqui esperamos "like" o "dislike"
     const userId = req.user.id;  // ID del usuario autenticado
 
-    const result = await db.collection("catalogo").findOneAndUpdate(
+    const result = await db.collection("inventario").findOneAndUpdate(
       { _id: req.params.id },
       {
         $pull: { likes: userId, dislikes: userId }, // primero removemos cualquier reacción previa
@@ -41,7 +42,7 @@ router.patch("/:id/like", requireAuth, async (req, res, next) => {
 
 
 // Rutas donde estan los endpoints del catálogo de películas y series 
-router.get("/", getCatalogo);                   // coge todo el catálogo
+router.get("/", getinventario);                   // coge todo el catálogo
 router.get("/categoria/:categoria", getByCategoria); // filtro por categoría
 router.get("/search", searchByTitle);           // búsqueda por título 
 router.get("/genre/:genre", getByGenre);       // filtra por género

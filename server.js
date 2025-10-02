@@ -19,7 +19,7 @@ async function start() {
   // Healthcheck útil para curl rápido
   app.get("/health", (_req, res) => res.json({ ok: true }));
 
-  app.listen(PORT, "0.0.0.0", () => {
+  app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT} exitosamente`);
   });
 }
