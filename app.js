@@ -29,16 +29,15 @@ const useCredentials = String(process.env.USE_CORS_CREDENTIALS || "true").toLowe
 
 
 const options = {
-  origin: 'https://auracamilapicoaraque.github.io',
-  credentials: true,
-  methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
-  allowedHeaders: ['Content-Type','Authorization','Accept'],
-  optionsSuccessStatus: 204
+    origin: 'https://auracamilapicoaraque.github.io',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    optionsSuccessStatus: 204
 };
 
 app.use(cors(options));
-
-app.options('*', cors(options));
+app.use((req, res, next) => { if (req.method === 'OPTIONS') return res.sendStatus(204); next(); });
 
 // Passport
 import "./config/passport.js";
