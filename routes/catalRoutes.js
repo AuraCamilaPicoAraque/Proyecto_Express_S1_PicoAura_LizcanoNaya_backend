@@ -125,6 +125,96 @@ router.get("/ranking", async (req, res, next) => {
 });
 
 
+router.get("/search", async (req, res, next) => {
+  try {
+    const db = getDB();
+    const query = req.query.q || "";
+    if (!query) {
+      return res.status(400).json({ error: "Query parameter 'q' is required -> https://http.cat/status/400" });
+    }
+    const items = await db.collection("inventario").find(
+      { title: { $regex: query, $options: "i" } }
+    ).toArray();
+    res.json(items);
+  } catch (err) {
+    next(err);
+  } 
+});
+
+
+
+// =================================
+/// CREAR, ACTUALIZAR Y BORRAR ítems del catálogo (solo admin)
+// =================================
+
+router.post("/createMovie", (req, res, next)=>{
+  try{
+    const db = getDB();
+    const newItem = req.body;
+    db.collection("inventario").insertOne(newItem);
+    res.status(201).json({ message: "Ítem creado correctamente" });
+  } catch(err){
+    next(err);
+  } 
+});
+
+router.post("/createSerie", (req, res, next)=>{
+  try{
+    const db = getDB();
+    const newItem = req.body;
+    db.collection("inventario").insertOne(newItem);
+    res.status(201).json({ message: "Ítem creado correctamente" });
+  } catch(err){
+    next(err);
+  } 
+});
+
+router.post("/createAnime", (req, res, next)=>{
+  try{
+    const db = getDB();
+    const newItem = req.body;
+    db.collection("inventario").insertOne(newItem);
+    res.status(201).json({ message: "Ítem creado correctamente" });
+  } catch(err){
+    next(err);
+  } 
+});
+
+
+// Eliminar un ítem por su ID
+router.delete("/delete/:tmdb_id", async (req, res, next) => {
+  try {
+    const db = getDB(); 
+    const result = await db.collection("inventario").deleteOne({ _id: req.params.tmdb_id});
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ error: "Ítem no encontrado -> https://http.cat/status/404" });
+    }
+    res.json({ message: "Ítem eliminado correctamente~" });
+  } catch (err) {
+    next(err);
+  }
+});
+
+
+// Actualizar un ítem por su ID
+router.put("/update/:tmdb_id", async (req, res, next) => {
+  try {
+    const db = getDB(); 
+    const updates = req.body;
+    const result = await db.collection("inventario").updateOne(
+      { _id: req.params.tmdb_id },
+      { $set: updates }
+    );
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: "Ítem no encontrado -> https://http.cat/status/404" });
+    }
+    res.json({ message: "Ítem actualizado correctamente" });
+  } catch (err) {
+    next(err);
+  }
+});
+
+
 
 
 // Rutas donde estan los endpoints del catálogo de películas y series 
