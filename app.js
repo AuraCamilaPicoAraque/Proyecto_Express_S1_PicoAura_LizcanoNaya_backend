@@ -20,16 +20,9 @@ app.set("json spaces", 2);
 app.set("trust proxy", 1);
 
 // CORS
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || process.env.CORS_ORIGIN || "")
-  .split(",")
-  .map(s => s.trim())
-  .filter(Boolean);
-
-const useCredentials = String(process.env.USE_CORS_CREDENTIALS || "true").toLowerCase() === "true";
-
 
 const options = {
-    origin: 'https://auracamilapicoaraque.github.io',
+    origin: 'https://naya741.github.io',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
