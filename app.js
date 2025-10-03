@@ -39,7 +39,6 @@ const options = {
 app.use(cors(options));
 app.use((req, res, next) => { if (req.method === 'OPTIONS') return res.sendStatus(204); next(); });
 
-
 // (Opcional) responder 204 a cualquier preflight que llegue hasta aquí
 app.use((req, res, next) => {
   if (req.method === "OPTIONS") return res.sendStatus(204);
