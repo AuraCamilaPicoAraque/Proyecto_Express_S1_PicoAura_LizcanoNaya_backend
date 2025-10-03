@@ -32,8 +32,14 @@
 import { Router } from "express";
 import { requireAuth, requireAdmin } from "../middlewares/authMiddleware.js";
 import { obtenerUsers } from "../controllers/userController.js";
+import { register, loginCookie, loginToken, logoutController } from "../controllers/authController.js";
+
 const router = Router();
 
 router.get("/", requireAuth, requireAdmin, obtenerUsers);
+router.post("/register", register);        // POST /api/auth/register
+router.post("/login", loginCookie);        // POST /api/auth/login (set-cookie)
+router.post("/login-token", loginToken);   // POST /api/auth/login-token (JWT en body)
+router.post("/logout", logoutController);  // POST /api/auth/logout
 
 export default router;

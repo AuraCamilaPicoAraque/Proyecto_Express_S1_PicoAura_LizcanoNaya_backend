@@ -30,6 +30,7 @@ const options = {
 };
 
 app.use(cors(options));
+
 app.use((req, res, next) => { if (req.method === 'OPTIONS') return res.sendStatus(204); next(); });
 
 // Passport
@@ -48,3 +49,8 @@ app.use("/api/catalogo", catalogoRoutes);
 app.use(errorHandler);
 
 export default app;
+
+
+
+
+
