@@ -27,15 +27,17 @@ const allowedOrigins = (process.env.ALLOWED_ORIGINS || process.env.CORS_ORIGIN |
 
 const useCredentials = String(process.env.USE_CORS_CREDENTIALS || "true").toLowerCase() === "true";
 
-app.use(cors({
-  origin(origin, cb) {
-    if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
-    return cb(new Error("Not allowed by CORS: " + origin));
-  },
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: useCredentials,
-}));
+
+const options = {
+    origin: 'https://auracamilapicoaraque.github.io',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    optionsSuccessStatus: 204
+};
+
+app.use(cors(options));
+app.use((req, res, next) => { if (req.method === 'OPTIONS') return res.sendStatus(204); next(); });
 
 
 // (Opcional) responder 204 a cualquier preflight que llegue hasta aquí
